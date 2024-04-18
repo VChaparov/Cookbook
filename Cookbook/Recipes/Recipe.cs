@@ -16,7 +16,7 @@
     {
         List<string> recipe = new List<string>();
         foreach(var ingredient in Ingredients)
-            recipe.Add(ingredient.ToString());
+            recipe.Add($"{ingredient}. {ingredient.Preparation()}");
         return string.Join(Separator,recipe);
     }
 }

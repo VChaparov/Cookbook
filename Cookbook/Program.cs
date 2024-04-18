@@ -1,15 +1,15 @@
 ﻿using Cookbook;
 
-var App = new CookbookApp(new RecipesRepository(new StringsRepository()), new UserInterface());
+var App = new CookbookApp(new RecipesRepository(new StringsRepository()), new ConsoleUserInterface());
 App.Run();
 
 public class CookbookApp
 {
-    private readonly RecipesRepository _recipesRepository;
-    private readonly UserInterface _userInterface;
+    private readonly IRecipesRepository _recipesRepository;
+    private readonly IUserInterface _userInterface;
 
     public CookbookApp(RecipesRepository recipesRepository,
-        UserInterface userInterface)
+        ConsoleUserInterface userInterface)
     {
         _recipesRepository = recipesRepository;
         _userInterface = userInterface;
@@ -19,7 +19,17 @@ public class CookbookApp
     {
         string filePath = "recipes.txt";
         var allRecipes = _recipesRepository.GetRecipes(filePath);
-        _userInterface.ShowRecipes(allRecipes);
+        if(allRecipes.Count() >0)
+        {
+            _userInterface.ShowRecipes(allRecipes);
+        }
+        else
+        {
+            _userInterface.ShowMessage("No recipes are saved in the file.");
+            _userInterface.ShowMessage("-----------");
+
+        }
+
         var Recipe =_userInterface.PromptNewRecipe();
 
         if( Recipe.GetIngredients().Count > 0 ) 

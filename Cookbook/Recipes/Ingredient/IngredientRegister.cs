@@ -4,10 +4,15 @@
         new List<Ingredient> 
         {
             new WheatFlour(),
-            new SpeltFlour()
+            new SpeltFlour(),
+            new Cinnamon(),
+            new Cardamom(),
+            new Butter(),
+            new Chocolate(),
+            new Sugar()
         }; 
     
-    public static Ingredient GetIngredient(int index)
+    public static Ingredient GetIngredientById(int index)
     {
         foreach(var ingredient in IngredientRegister.All)
         {

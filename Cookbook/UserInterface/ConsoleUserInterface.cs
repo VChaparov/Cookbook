@@ -2,14 +2,18 @@
 
 using System.Net.Http.Headers;
 
-public class UserInterface
+public class ConsoleUserInterface:IUserInterface
 {
     public void Exit()
     {
         Console.WriteLine("Press any key to exit.");
         Console.ReadKey();
     }
-
+    public List<Ingredient> GetIngredientsFromUser()
+    {
+        List<Ingredient> ingredients = new List<Ingredient>();
+        return ingredients;
+    }
     public Recipe PromptNewRecipe()
     {
        var ingredients = new List<Ingredient>();
@@ -31,11 +35,13 @@ public class UserInterface
                 {
                     Ingredients.Add(ingredient);
                 }
+                else
+                {
+                    finishedChoosing = true;
+                    ShowMessage("No Ingredient Chosen");
+                }
             }
-            else{
-                finishedChoosing = true;
-                ShowMessage("No Ingredient Chosen");
-            }
+            
         }
         return new Recipe(Ingredients);
     }
