@@ -1,5 +1,4 @@
-﻿
-namespace Cookbook
+﻿namespace Cookbook.DataAccess
 {
     public interface IStringsRepository
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cookbook
+namespace Cookbook.DataAccess
 {
-    public class StringsRepository : IStringsRepository
+    public class TextRepository : IStringsRepository
     {
         private static readonly string Seperator = Environment.NewLine;
 

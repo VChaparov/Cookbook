@@ -1,23 +1,36 @@
 ﻿using Cookbook;
+using Cookbook.DataAccess;
+const FileFormat fileFormat = FileFormat.Json;
+IStringsRepository stringsRepository;
+if (fileFormat == FileFormat.Json)
+{
+    stringsRepository = new JsonRepository();
+}
+else if (fileFormat == FileFormat.Txt)
+    {
+        stringsRepository = new TextRepository();
+    }
+string filePath = $"recipes{fileFormat}";
 
-var App = new CookbookApp(new RecipesRepository(new StringsRepository()), new ConsoleUserInterface());
-App.Run();
+var App = new CookbookApp(new RecipesRepository(stringsRepository), new ConsoleUserInterface());
 
+App.Run(filePath);
 public class CookbookApp
 {
     private readonly IRecipesRepository _recipesRepository;
     private readonly IUserInterface _userInterface;
 
-    public CookbookApp(RecipesRepository recipesRepository,
+    public CookbookApp(
+        RecipesRepository recipesRepository,
         ConsoleUserInterface userInterface)
+        
     {
         _recipesRepository = recipesRepository;
         _userInterface = userInterface;
     }
 
-    public void Run()
+    public void Run(string filePath)
     {
-        string filePath = "recipes.txt";
         var allRecipes = _recipesRepository.GetRecipes(filePath);
         if(allRecipes.Count() >0)
         {
